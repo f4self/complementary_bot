@@ -8,10 +8,11 @@
     <style>
         body {
             --bg-color: var(--tg-theme-bg-color);
-            font: 12px/18px "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--tg-theme-text-color);
-            margin: 48px 24px;
+            font: 10px/16px "Roboto", Arial, Helvetica, Verdana, sans-serif;
+            font-weight: lighter;
+            background-color: #25181f;
+            color: #ffffff;
+            margin: 0 0;
             padding: 0;
             color-scheme: var(--tg-color-scheme);
         }
@@ -19,58 +20,89 @@
         a {
             color: var(--tg-theme-link-color);
         }
-        #viewport {
-            position: fixed;
-            left: 0;
-            right: 0;
-            top: 0;
-            height: var(--tg-viewport-stable-height, 100vh);
-            pointer-events: none;
-            transition: all .2s ease;
-        }
-        #viewport:after {
-            content: '';
-            display: block;
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            border-width: 4px;
-            border-style: solid;
-            border-image: linear-gradient(45deg, rgba(64, 224, 208, .5), rgba(173, 255, 47, .5)) 1;
+        p {
+            font-size: 14px;
+            color: #866b79;
+            margin: 0;
         }
 
-        #viewport-params-size,
-        #viewport-params-expand {
-            content: attr(text);
-            position: absolute;
-            display: inline-block;
-            background: var(--tg-theme-link-color, rgb(64, 224, 208));
-            right: 4px;
-            left: auto;
-            font-size: 8px;
-            padding: 4px;
-            vertical-align: top;
+        .cents {
+            font-size: 30px;
+            font-weight: lighter;
         }
-        #viewport-params-size {
-            top: 4px;
+
+        .cash {
+            font-size: 44px;
+            font-weight: lighter;
         }
-        #viewport-params-expand {
-            top: 30px;
+
+        .symbol {
+            font-size: 30px;
+            font-weight: lighter;
+            color: #866b79;
+        }
+
+        .button {
+            color: #ed8abf;
+            font-size: 13px;
+            font-weight: 600;
+            font-family: "Roboto Mono", Helvetica, Verdana, sans-serif;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            margin-bottom: 12px;
+            margin-left: 16px;
+            margin-right: 16px;
+            align-content: center;
+            flex-wrap: nowrap;
+            flex-direction: row;
+        }
+
+        button {
+            background-color: transparent;
+            border-color: transparent;
+            padding: 0;
         }
     </style>
 </head>
 
 <body>
     <main>
-        <div align="center">
-            <a href="https://ton.org/"><img width="48" src="logo.gif" alt="logo of telegram web apps"></a>
+        <p style="display: flex; justify-content: center; align-items: center; margin-top: 42px;">Пример</p>
+        <div style="display: flex; justify-content: center; align-items: end; height: 68px; margin-bottom: 12px;">
+            <h1 class="cash">0,</h1>
+            <h2 class="cents">00</h2>
+            <p>ㅤ</p>
+            <h2 class="symbol">€</h2>
         </div>
-        <h1>Modals</h1>
+
+        <div class="buttons">
+            <button onclick="showPopup();"><div style="display: flex; flex-direction: column; align-items: center;">
+                <img src="icon1.png" width="26px" height="auto" style="margin-bottom: 6px;">
+                <p class="button">Отправить</p>
+            </div></button>
+            <button onclick="showPopup();"><div style="display: flex; flex-direction: column; align-items: center;">
+                <img src="icon2.png" width="24px" height="auto" style="margin-bottom: 8px;">
+                <p class="button">Пополнить</p>
+            </div></button>
+            <button onclick="showPopup();"><div style="display: flex; flex-direction: column; align-items: center;">
+                <img src="icon3.png" width="24px" height="auto" style="margin-bottom: 8px;">
+                <p class="button">Обменять</p>
+            </div></button>
+            <button onclick="showPopup();"><div style="display: flex; flex-direction: column; align-items: center;">
+                <img src="icon3.png" width="24px" height="auto" style="margin-bottom: 8px;">
+                <p class="button">P2P Маркет</p>
+            </div></button>
+        </div>
+
+        <hr width="maximum-scale" color="#34242b" size="12">
+
         <button onclick="Telegram.WebApp.showAlert('Hello World!');">Launch Alert</button>
         <button onclick="showPopup();">Launch Popup</button>
-
+        
         <h1>Links</h1>
         <ul>
             <li>
@@ -88,9 +120,6 @@
         <button onclick="Telegram.WebApp.expand();">Expand Webview</button>
         <button onclick="toggleMainButton();">Toggle Main Button</button>
     </main>
-    <div id="viewport"></div>
-    <div id="viewport-params-size"></div>
-    <div id="viewport-params-expand"></div>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         // Init TWA
@@ -116,12 +145,12 @@
                 title: 'Title',
                 message: 'Some message',
                 buttons: [
-                    {id: 'link', type: 'default', text: 'Open ton.org'},
+                    {id: 'link', type: 'default', text: 'OK'},
                     {type: 'cancel'},
                 ]
             }, function(btn) {
                 if (btn === 'link') {
-                    Telegram.WebApp.openLink('https://ton.org/');
+                    Telegram.WebApp.openLink('https://google.com');
                 }
             });
         };
@@ -154,9 +183,5 @@
         });
 
     </script>
-
-    <!-- Eruda is console for mobile browsers -->
-    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-    <script>eruda.init();</script>
 </body>
 </html>
